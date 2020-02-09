@@ -1,8 +1,5 @@
-# Fastfeet-backend
-Desenvolvimento de um app para uma transportadora fictícia, o FastFeet.
-
 <h1 align="center">
-  <img alt="Fastfeet" title="Fastfeet" src=".github/logo.png" width="300px" />
+  <img src="https://github.com/Rocketseat/bootcamp-gostack-desafio-02/blob/master/.github/logo.png?raw=true" width="300px" />
 </h1>
 
 <h3 align="center">
