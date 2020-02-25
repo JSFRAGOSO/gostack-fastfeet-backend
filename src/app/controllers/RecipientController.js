@@ -1,17 +1,8 @@
 import Recipient from '../models/Recipient';
-import User from '../models/User';
 
 class RecipientController {
     async store(req, res) {
-        const { tokenId } = req;
         const { name } = req.body;
-
-        const user = await User.findByPk(tokenId);
-
-        if (!user.is_admin)
-            return res.status(401).json({
-                error: 'Only Admin can create Recipients',
-            });
 
         const recipientExists = await Recipient.findOne({ where: { name } });
 
@@ -41,20 +32,11 @@ class RecipientController {
     }
 
     async update(req, res) {
-        const { tokenId } = req;
-        const { recipientId } = req.params;
+        const { id } = req.params;
 
-        const user = await User.findByPk(tokenId);
-
-        if (!user.is_admin)
-            return res.status(401).json({
-                error: 'Only Admin can update Recipients',
-            });
-
-        const recipient = Recipient.findByPk(recipientId);
+        const recipient = Recipient.findByPk(id);
 
         const {
-            id,
             name,
             street,
             number,
