@@ -7,7 +7,7 @@ export default async (req, res, next) => {
     const { authorization } = req.headers;
 
     if (!authorization) {
-        res.status(401).json({ error: 'User is not authenticated' });
+        return res.status(401).json({ error: 'User is not authenticated' });
     }
     const [, token] = authorization.split(' ');
 
