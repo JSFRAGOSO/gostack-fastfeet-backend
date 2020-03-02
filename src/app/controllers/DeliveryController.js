@@ -6,6 +6,8 @@ class DeliveryController {
     async store(req, res) {
         const { delivermanId, orderId } = req.params;
         const { date, signature_id } = req.body;
+        const deliveryTime = parseISO(date);
+
         /*
          * Check if deliverman exists
          */
@@ -51,16 +53,11 @@ class DeliveryController {
                 error: 'This order has already been delivered',
             });
 
-        const deliveryTime = parseISO(date);
-
         /*
          * Check for past dates
          */
 
-        if (
-            isBefore(deliveryTime, new Date()) ||
-            isBefore(deliveryTime, order.start_date)
-        )
+        if (isBefore(deliveryTime, new Date()))
             return res.status(401).json({
                 error: 'Past dates are no allowed',
             });
