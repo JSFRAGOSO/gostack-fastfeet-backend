@@ -15,6 +15,8 @@ class PickupController {
     async store(req, res) {
         const { delivermanId, orderId } = req.params;
         const { date } = req.body;
+        const pickupTime = parseISO(date);
+
         /*
          * Check if deliverman exists
          */
@@ -42,7 +44,14 @@ class PickupController {
                 error: 'This order do not belongs to this deliveryman',
             });
 
-        const pickupTime = parseISO(date);
+        /*
+         * Check if this order has been already picked up
+         */
+
+        if (order.start_date)
+            return res.status(401).json({
+                error: 'This order has already been picked up',
+            });
 
         /*
          * Check for past dates
