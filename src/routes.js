@@ -9,6 +9,8 @@ import FileController from './app/controllers/FileController';
 import OrderController from './app/controllers/OrderController';
 import DeliveredOrderController from './app/controllers/DeliveredOrderController';
 import UndeliveredOrderController from './app/controllers/UndeliveredOrderController';
+import PickupController from './app/controllers/PickupController';
+import DeliveryController from './app/controllers/DeliveryController';
 import authentication from './app/middlewares/authentication';
 import RecipientCheckData from './app/middlewares/RecipientCheckData';
 import CheckAdministration from './app/middlewares/checkAdministration';
@@ -35,6 +37,15 @@ routes.get('/orders', OrderController.index);
 routes.post('/orders', OrderController.store);
 routes.put('/orders/:id', OrderController.update);
 routes.delete('/orders/:id', OrderController.delete);
+
+routes.post(
+    '/deliverymen/:delivermanId/orders/:/pickup',
+    PickupController.store
+);
+routes.post(
+    '/deliverymen/:delivermanId/orders/:orderId/delivery',
+    DeliveryController.store
+);
 
 routes.post('/recipients', RecipientCheckData, RecipientController.store);
 routes.put('/recipients/:id', RecipientCheckData, RecipientController.update);
