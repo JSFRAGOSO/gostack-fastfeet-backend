@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import multer from 'multer';
 import multerConfig from './config/multer';
+
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import RecipientController from './app/controllers/RecipientController';
@@ -11,6 +12,9 @@ import DeliveredOrderController from './app/controllers/DeliveredOrderController
 import UndeliveredOrderController from './app/controllers/UndeliveredOrderController';
 import PickupController from './app/controllers/PickupController';
 import DeliveryController from './app/controllers/DeliveryController';
+import ProblemDashboardController from './app/controllers/ProblemDashboardController';
+import ProblemController from './app/controllers/ProblemController';
+
 import authentication from './app/middlewares/authentication';
 import RecipientCheckData from './app/middlewares/RecipientCheckData';
 import CheckAdministration from './app/middlewares/checkAdministration';
@@ -46,6 +50,10 @@ routes.post(
     '/deliverymen/:delivermanId/orders/:orderId/delivery',
     DeliveryController.store
 );
+
+routes.get('/deliveries/problems', ProblemDashboardController.index);
+routes.get('/delivery/:id/problems', ProblemController.index);
+routes.post('/delivery/:id/problems', ProblemController.store);
 
 routes.post('/recipients', RecipientCheckData, RecipientController.store);
 routes.put('/recipients/:id', RecipientCheckData, RecipientController.update);
