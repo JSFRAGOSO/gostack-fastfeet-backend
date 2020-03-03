@@ -14,6 +14,7 @@ import PickupController from './app/controllers/PickupController';
 import DeliveryController from './app/controllers/DeliveryController';
 import ProblemDashboardController from './app/controllers/ProblemDashboardController';
 import ProblemController from './app/controllers/ProblemController';
+import CancellationController from './app/controllers/CancellationController';
 
 import authentication from './app/middlewares/authentication';
 import RecipientCheckData from './app/middlewares/RecipientCheckData';
@@ -43,7 +44,7 @@ routes.put('/orders/:id', OrderController.update);
 routes.delete('/orders/:id', OrderController.delete);
 
 routes.post(
-    '/deliverymen/:delivermanId/orders/:/pickup',
+    '/deliverymen/:delivermanId/orders/:orderId/pickup',
     PickupController.store
 );
 routes.post(
@@ -54,6 +55,7 @@ routes.post(
 routes.get('/deliveries/problems', ProblemDashboardController.index);
 routes.get('/delivery/:id/problems', ProblemController.index);
 routes.post('/delivery/:id/problems', ProblemController.store);
+routes.delete('/problem/:id/cancel-delivery', CancellationController.delete);
 
 routes.post('/recipients', RecipientCheckData, RecipientController.store);
 routes.put('/recipients/:id', RecipientCheckData, RecipientController.update);
