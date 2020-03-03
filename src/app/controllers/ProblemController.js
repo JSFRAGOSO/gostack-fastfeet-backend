@@ -26,7 +26,7 @@ class ProblemController {
         const order = await Order.findByPk(id);
 
         if (!order)
-            return res.status(401).json({ error: 'Order does not exists' });
+            return res.status(400).json({ error: 'Order does not exists' });
 
         const deliveryProblem = await DeliveryProblem.create({
             description,
